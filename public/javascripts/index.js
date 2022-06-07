@@ -60,23 +60,37 @@ let WorkoutObject = function (
   return this;
 };
 
-workoutArray.push(new WorkoutObject("Man", "Sprints", 3, 45));
-workoutArray.push(new WorkoutObject("Woman", "Yoga", 3, 60));
-workoutArray.push(new WorkoutObject("Man", "Strength_Training", 3, 75));
+// workoutArray.push(new WorkoutObject("Man", "Sprints", 3, 45));
+// workoutArray.push(new WorkoutObject("Woman", "Yoga", 3, 60));
+// workoutArray.push(new WorkoutObject("Man", "Strength_Training", 3, 75));
 
 document.addEventListener("DOMContentLoaded", function () {
-  createList();
+  // createList();
 
   // add button events ************************************************************************
 
   document.getElementById("addBtn").addEventListener("click", function () {
-    workoutArray.push(
+    let newWorkout = (
       new WorkoutObject(
         document.getElementById("body-type").value,
         document.getElementById("workout-type").value,
         document.getElementById("intensity").value,
-        document.getElementById("workout-duration-input").value
+        document.getElementById("workout-duration-input").value,
+
+
+        $.ajax({
+        url: "/AddWorkouts",
+        type: "POST",
+        contentType: "application/json; charset-utf-8",
+        dataType: "json",
+        success: function(result) {
+          console.log(result);
+          document.location.href = "index.html#show"
+        }
+        })
       )
+
+      
     );
   });
   // document.location.href = "index.html#ListAll";
@@ -121,6 +135,12 @@ function createList() {
   let theList = document.getElementById("myul");
   theList.innerHTML = "";
 
+
+$.get("/getAllWorkouts", function(data, status) {
+  console.log(status);
+  workoutArray = data;
+});
+
   workoutArray.forEach(function (element, i) {
     // use handy array forEach method
     var myLi = document.createElement("li");
@@ -134,7 +154,7 @@ function createList() {
     myLi.setAttribute("workout-title", element.workoutType);
     myLi.setAttribute("workout-intensity", element.workoutIntensity);
     myLi.setAttribute("workout-duration", element.workoutDuration);
-    myLi.setAttribute("calories", element.CalculateCalories());
+    // myLi.setAttribute("calories", element.CalculateCalories());
 
     theList.appendChild(myLi);
 
