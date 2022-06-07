@@ -70,28 +70,26 @@ document.addEventListener("DOMContentLoaded", function () {
   // add button events ************************************************************************
 
   document.getElementById("addBtn").addEventListener("click", function () {
-    let newWorkout = (
-      new WorkoutObject(
+     let newWorkout = 
+        new WorkoutObject(
         document.getElementById("body-type").value,
         document.getElementById("workout-type").value,
         document.getElementById("intensity").value,
         document.getElementById("workout-duration-input").value,
+      )
 
-
-        $.ajax({
-        url: "/AddWorkouts",
+      $.ajax({
+        url: "/AddWorkout",
         type: "POST",
+        data: JSON.stringify(newWorkout),
         contentType: "application/json; charset-utf-8",
-        dataType: "json",
         success: function(result) {
           console.log(result);
           document.location.href = "index.html#show"
         }
-        })
-      )
-
+        });
       
-    );
+    
   });
   // document.location.href = "index.html#ListAll";
   // also add the URL value

@@ -79,6 +79,13 @@ router.get('/getAllWorkouts', function(req, res) {
   res.status(200).json(serverArray);
 })
 
+router.post('/AddWorkout', function(req, res) {
+  const newWorkout = req.body;
+  // newWorkout.ID = lastID++;
+  serverArray.push(newWorkout);
+  res.status(200).json(newWorkout);
+})
+
 
 
 module.exports = router;
