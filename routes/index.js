@@ -1,6 +1,5 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-
 
 let serverArray = [];
 
@@ -68,24 +67,22 @@ serverArray.push(new WorkoutObject("Man", "Sprints", 3, 45));
 serverArray.push(new WorkoutObject("Woman", "Yoga", 3, 60));
 serverArray.push(new WorkoutObject("Man", "Strength_Training", 3, 75));
 
-
-
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get("/", function (req, res, next) {
   res.sendFile("index.html");
 });
 
-router.get('/getAllWorkouts', function(req, res) {
+router.get("/getAllWorkouts", function (req, res) {
   res.status(200).json(serverArray);
-})
+});
 
-router.post('/AddWorkout', function(req, res) {
+router.post("/AddWorkout", function (req, res) {
   const newWorkout = req.body;
   // newWorkout.ID = lastID++;
   serverArray.push(newWorkout);
   res.status(200).json(newWorkout);
-})
+});
 
-
+// router.delete("/DeleteWorkout", function () {});
 
 module.exports = router;

@@ -70,26 +70,28 @@ document.addEventListener("DOMContentLoaded", function () {
   // add button events ************************************************************************
 
   document.getElementById("addBtn").addEventListener("click", function () {
-     let newWorkout = 
-        new WorkoutObject(
-        document.getElementById("body-type").value,
-        document.getElementById("workout-type").value,
-        document.getElementById("intensity").value,
-        document.getElementById("workout-duration-input").value,
-      )
+    let newWorkout = new WorkoutObject(
+      document.getElementById("body-type").value,
+      document.getElementById("workout-type").value,
+      document.getElementById("intensity").value,
+      document.getElementById("workout-duration-input").value
+    );
 
-      $.ajax({
-        url: "/AddWorkout",
-        type: "POST",
-        data: JSON.stringify(newWorkout),
-        contentType: "application/json; charset-utf-8",
-        success: function(result) {
-          console.log(result);
-          document.location.href = "index.html#show"
-        }
-        });
-      
-    
+    $.ajax({
+      url: "/AddWorkout",
+      type: "POST",
+      data: JSON.stringify(newWorkout),
+      contentType: "application/json; charset=utf-8",
+      success: function (result) {
+        console.log(result.data);
+        document.location.href = "index.html#show";
+      },
+    });
+
+    // document.getElementById("body-type").value = "",
+    //   document.getElementById("workout-type").value = "",
+    //   document.getElementById("intensity").value = "",
+    //   document.getElementById("workout-duration-input").value = ""
   });
   // document.location.href = "index.html#ListAll";
   // also add the URL value
@@ -133,11 +135,10 @@ function createList() {
   let theList = document.getElementById("myul");
   theList.innerHTML = "";
 
-
-$.get("/getAllWorkouts", function(data, status) {
-  console.log(status);
-  workoutArray = data;
-});
+  $.get("/getAllWorkouts", function (data, status) {
+    console.log(status);
+    workoutArray = data;
+  });
 
   workoutArray.forEach(function (element, i) {
     // use handy array forEach method
@@ -152,6 +153,9 @@ $.get("/getAllWorkouts", function(data, status) {
     myLi.setAttribute("workout-title", element.workoutType);
     myLi.setAttribute("workout-intensity", element.workoutIntensity);
     myLi.setAttribute("workout-duration", element.workoutDuration);
+
+
+
     // myLi.setAttribute("calories", element.CalculateCalories());
 
     theList.appendChild(myLi);
