@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="/javascripts/index.js"></script>
+    <title>Fitness Tracker</title>
+
+    <!-- This project will keep track of user input workouts and calculate relevant details based on the type of workout -->
+  </head>
+  <body>
+    <div data-role="page" id="home">
+      <!-- header -->
+      <div data-role="header" data-theme="a">
+        <div data-role="navbar" data-theme="a">
+          <ul>
+            <li><a href="#home">Home Page</a></li>
+            <li><a href="#add">Add New Workout</a></li>
+            <li><a href="#show">Your Workouts</a></li>
+          </ul>
+        </div>
+        <h2 class="header-background-color">Welcome to Fitness Tracker</h2>
+      </div>
+
+      <!-- content -->
+      <h3 data-role="content" data-theme="a">
+        This home page will introduce the project and go over what it is trying
+        to accomplish
+      </h3>
+      <h4>
+        The goal of this fitness tracker is calculate calories burned and other
+        relevant details based on the type of workout completed and the duration
+        of the workout.
+      </h4>
+
+      <!-- notes footer -->
+      <div data-role="footer" data-theme="a">
+        <h3>Copyright 2022 by Gabriel Blake</h3>
+      </div>
+    </div>
+    <!-- end of page -------------------------------------------->
+
+    <div data-role="page" id="show">
+      <!-- header -->
+      <div data-role="header" data-theme="a">
+        <!-- /navbar -->
+        <div data-role="navbar" data-theme="a">
+          <ul>
+            <li><a href="#home">Home Page</a></li>
+            <li><a href="#add">Add New Workout</a></li>
+            <li><a href="#show">Your Workouts</a></li>
+          </ul>
+        </div>
+        <h2>Here are Your Workouts</h2>
+      </div>
+
+      <!-- content -->
+      <div data-role="content" data-theme="a">
+        This page will list your completed workouts and will lead to a page that
+        will show the details of the clicked workout
+      </div>
+      <div class="workout-list">
+        <ul id="myul"></ul>
+      </div>
+
+      <!-- notes footer -->
+      <div data-role="footer" data-theme="a">
+        <h3>Copyright 2022 by Gabriel Blake</h3>
+      </div>
+    </div>
+    <!-- end of page ----------------------------------->
+
+    <div data-role="page" id="add">
+      <!-- header -->
+      <div data-role="header" data-theme="a">
+        <aiv data-role="navbar" data-theme="a">
+          <ul>
+            <li><a href="#home">Home Page</a></li>
+            <li><a href="#add">Add New Workout</a></li>
+            <li><a href="#show">Your Workouts</a></li>
+          </ul>
+        </aiv>
+        <h2>Add a New Workout</h2>
+      </div>
+
+      <!-- content -->
+      <div data-role="content" data-theme="a">
+        <label for="body-type">I am a</label>
+        <select name="body-type" id="body-type">
+          <option value="none" selected disabled hidden>
+            Select an Option
+          </option>
+          <option value="Man">Man</option>
+          <option value="Woman">Woman</option>
+        </select>
+        <br />
+        <label for="workout-type">Workout Type</label>
+        <select name="workout-type" id="workout-type">
+          <option value="none" selected disabled hidden>
+            Select an Option
+          </option>
+          <option value="Walking">Walking</option>
+          <option value="Joggging">Joggging</option>
+          <option value="Sprints">Sprints</option>
+          <option value="Strength_Training">Strength Training</option>
+          <option value="Yoga">Yoga</option>
+          <option value="Dance">Dance</option>
+          <option value="Cycling">Cycling</option>
+          <option value="Treadmill">Treadmill</option>
+          <option value="Elliptical">Elliptical</option>
+          <option value="CrossFit">CrossFit</option>
+          <option value="Jump_Rope">Jump Rope</option>
+          <option value="Basketball">Basketball</option>
+          <option value="Soccer">Soccer</option>
+        </select>
+        <br />
+        <label for="intensity">Intensity</label>
+        <select name="intensity" id="intensity">
+          <option value="none" selected disabled hidden>
+            Select an Option
+          </option>
+          <option value="1">Light (Able to hold a conversation)</option>
+          <option value="2">Moderate (Body warmth, light sweating)</option>
+          <option value="3">
+            Difficult (Moderate sweating, heavy breathing)
+          </option>
+          <option value="4">Intense (Very heavy sweating, can't talk)</option>
+        </select>
+        <br />
+        <label for="workout-duration">Workout Duration (In minutes) :</label>
+        <input name="workout-duration" id="workout-duration-input" />
+
+        <button id="addBtn">Add Workout</button>
+        <div data-role="popup" id="popupMenu" data-theme="b">
+          <ul data-role="listview" data-inset="true" style="min-width: 210px">
+            <li data-role="list-divider">Choose an action</li>
+            <li><a href="#home" data-transition="flow">Back to Home</a></li>
+            <li><a href="#show" data-transition="fade">Show Workout</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- notes footer -->
+      <div data-role="footer" data-theme="a">
+        <h3>Copyright 2022 by Gabriel Blake</h3>
+      </div>
+    </div>
+    <!-- end of page --------------------------------------->
+
+    <div data-role="page" id="details">
+      <!-- header -->
+      <div data-role="header" data-theme="a">
+        <aiv data-role="navbar" data-theme="a">
+          <ul>
+            <li><a href="#home">Home Page</a></li>
+            <li><a href="#add">Add New Workout</a></li>
+            <li><a href="#show">Your Workouts</a></li>
+          </ul>
+        </aiv>
+        <h2>Workout Information</h2>
+      </div>
+
+      <!-- content -->
+      <div data-role="content" data-theme="a">
+        <h3>Workout Details</h3>
+        <h4>You clicked the workout with an id of</h4>
+        <div id="workout-id"></div>
+        <div id="workout-title"></div>
+        <div id="workout-intensity"></div>
+        <div id="workout-duration"></div>
+        <h4 id="calories"></h4>
+        <br />
+      </div>
+
+      <!-- <div data-role="popup" id="popupMenu" data-theme="b">
+          <ul data-role="listview" data-inset="true" style="min-width: 210px">
+            <li data-role="list-divider">Choose an action</li>
+            <li><a href="#home" data-transition="flow">Back to Home</a></li>
+            <li><a href="#show" data-transition="fade">Show Workout</a></li>
+          </ul>
+        </div>
+      </div> -->
+
+      <!-- footer -->
+      <div data-role="footer" data-theme="b">
+        <h3>Copyright 2022 by Gabriel Blake</h3>
+      </div>
+    </div>
+    <script type="text/javascript" src="javascripts/index.js"></script>
+  </body>
+</html>
