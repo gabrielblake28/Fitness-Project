@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
       contentType: "application/json; charset=utf-8",
       success: function (result) {
         console.log(result.data);
-        document.location.href = "index.html#show";
+        // document.location.href = "index.html#show";
       },
     });
   });
@@ -114,9 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById(
       "workout-duration"
     ).innerHTML = `Workout Duration(in minutes): ${workoutDuration}`;
-    document.getElementById(
-      "calories"
-    ).innerHTML = `Total Calories Burned: ${calories}`;
+    // document.getElementById(
+    //   "calories"
+    // ).innerHTML = `Total Calories Burned: ${calories}`;
   });
 
   // end of page before show code *************************************************************************
@@ -136,6 +136,8 @@ function createList() {
 
   workoutArray.forEach(function (element, i) {
     // use handy array forEach method
+    var ul = document.createElement("ul");
+
     var myLi = document.createElement("li");
     myLi.classList.add("workout-link");
     myLi.innerHTML =
@@ -148,6 +150,8 @@ function createList() {
     myLi.setAttribute("workout-intensity", element.workoutIntensity);
     myLi.setAttribute("workout-duration", element.workoutDuration);
 
+
+    ul.appendChild(myLi);
     // myLi.setAttribute("calories", element.CalculateCalories());
 
     theList.appendChild(myLi);
@@ -169,7 +173,7 @@ function createList() {
         localStorage.setItem("parm", parm);
         localStorage.setItem("intensity", intensity);
         localStorage.setItem("duration", duration);
-        localStorage.setItem("calories", calories);
+        // localStorage.setItem("calories", calories);
         document.location.href = "index.html#details";
       });
     });
