@@ -87,13 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.location.href = "index.html#show";
       },
     });
-
-    // document.getElementById("body-type").value = "",
-    //   document.getElementById("workout-type").value = "",
-    //   document.getElementById("intensity").value = "",
-    //   document.getElementById("workout-duration-input").value = ""
   });
-  // document.location.href = "index.html#ListAll";
   // also add the URL value
 
   // page before show code *************************************************************************
@@ -109,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let workoutTitle = localStorage.getItem("title");
     let workoutIntensity = localStorage.getItem("intensity");
     let workoutDuration = localStorage.getItem("duration");
-    let calories = localStorage.getItem("calories");
+    // let calories = localStorage.getItem("calories");
     document.getElementById("workout-id").innerHTML = workoutID;
     document.getElementById(
       "workout-title"
@@ -128,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // end of page before show code *************************************************************************
 });
 
-function getCalories() {}
+// function getCalories() {}
 
 function createList() {
   // clear prior data
@@ -154,8 +148,6 @@ function createList() {
     myLi.setAttribute("workout-intensity", element.workoutIntensity);
     myLi.setAttribute("workout-duration", element.workoutDuration);
 
-
-
     // myLi.setAttribute("calories", element.CalculateCalories());
 
     theList.appendChild(myLi);
@@ -171,7 +163,7 @@ function createList() {
         // var duration = this.getAttribute("workout-duration");
         var intensity = this.getAttribute("workout-intensity");
         var duration = this.getAttribute("workout-duration");
-        let calories = this.getAttribute("calories");
+        // let calories = this.getAttribute("calories");
 
         localStorage.setItem("title", title);
         localStorage.setItem("parm", parm);
