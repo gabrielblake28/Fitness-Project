@@ -4,3 +4,22 @@
 #home {
   text-align: center;
 }
+
+.footer-style {
+  /* background-color: red; */
+  bottom: 0;
+  position: absolute;
+}
+
+.home-page-content-text {
+  margin: 0 250px;
+  line-height: 35px;
+}
+
+.home-page-content-container {
+  display: flex;
+  flex-direction: row;
+}
+.home-page-images {
+  margin-top: 100px;
+}

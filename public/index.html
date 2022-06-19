@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="./stylesheets/style.css" />
     <link
       rel="stylesheet"
       href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
@@ -27,23 +27,36 @@
             <li><a href="#show">Your Workouts</a></li>
           </ul>
         </div>
-        <h2 class="header-background-color">Welcome to Fitness Tracker</h2>
+        <h2 class="header-background-color">Personal Fitness Tracker</h2>
       </div>
 
       <!-- content -->
       <h3 data-role="content" data-theme="a">
-        This home page will introduce the project and go over what it is trying
-        to accomplish
+        <!-- This home page will introduce the project and go over what it is trying
+        to accomplish -->
+        <div class="home-page-content-container">
+          <div class="home-page-content-text">
+            Personal Fitness Tracker was made to ease the complicated process of
+            understanding and calculating workout progress. With this site you,
+            by answering a few of questions, are able to quicky get the amount
+            of calories burned for a range of different exercises.
+          </div>
+          <!-- <div class="home-page-content-img">
+            <img src="./assets/workout1.jpg" height="150px" width="270px" />
+          </div> -->
+        </div>
       </h3>
-      <h4>
-        The goal of this fitness tracker is calculate calories burned and other
-        relevant details based on the type of workout completed and the duration
-        of the workout.
-      </h4>
+      <div class="home-page-images-container">
+        <div class="home-page-images">
+          <img src="./assets/workout4.png" width="1200px" alt="" />
+        </div>
+      </div>
 
       <!-- notes footer -->
-      <div data-role="footer" data-theme="a">
-        <h3>Copyright 2022 by Gabriel Blake</h3>
+      <div class="footer-style">
+        <div data-role="footer" data-theme="a">
+          <h3>Copyright 2022 by Gabriel Blake</h3>
+        </div>
       </div>
     </div>
     <!-- end of page -------------------------------------------->
