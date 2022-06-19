@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
       contentType: "application/json; charset=utf-8",
       success: function (result) {
         console.log(result.data);
-        // document.location.href = "index.html#show";
+        document.location.href = "index.html#show";
       },
     });
   });
@@ -132,7 +132,7 @@ function createList() {
   $.get("/getAllWorkouts", function (data, status) {
     console.log(status);
     workoutArray = data;
-  });
+  
 
   workoutArray.forEach(function (element, i) {
     // use handy array forEach method
@@ -142,6 +142,7 @@ function createList() {
     myLi.classList.add("workout-link");
     myLi.innerHTML =
       element.workoutType + ":  " + element.workoutDuration + " mins";
+    
 
     // use the html5 "data-parm" to store the ID of this particular workout object
     // that we are currently building an li for so that I can later know which workout this li came from
@@ -178,4 +179,5 @@ function createList() {
       });
     });
   });
+});
 }
