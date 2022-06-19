@@ -37,9 +37,9 @@
         <div class="home-page-content-container">
           <div class="home-page-content-text">
             Personal Fitness Tracker was made to ease the complicated process of
-            understanding and calculating workout progress. With this site you,
-            by answering a few of questions, are able to quicky get the amount
-            of calories burned for a range of different exercises.
+            understanding and calculating workout progress. With this site, by
+            answering a few short questions, you are able to quicky get the
+            amount of calories burned for a range of different exercises.
           </div>
           <!-- <div class="home-page-content-img">
             <img src="./assets/workout1.jpg" height="150px" width="270px" />
@@ -54,7 +54,7 @@
 
       <!-- notes footer -->
       <div class="footer-style">
-        <div data-role="footer" data-theme="a">
+        <div data-role="footer" data-theme="b">
           <h3>Copyright 2022 by Gabriel Blake</h3>
         </div>
       </div>
@@ -76,16 +76,14 @@
       </div>
 
       <!-- content -->
-      <div data-role="content" data-theme="a">
-        This page will list your completed workouts and will lead to a page that
-        will show the details of the clicked workout
-      </div>
-      <div class="workout-list">
-        <ul id="myul"></ul>
+      <div class="show-workouts-section-container">
+        <div class="workout-list">
+          <ul id="myul"></ul>
+        </div>
       </div>
 
       <!-- notes footer -->
-      <div data-role="footer" data-theme="a">
+      <div data-role="footer" data-theme="b">
         <h3>Copyright 2022 by Gabriel Blake</h3>
       </div>
     </div>
@@ -106,63 +104,62 @@
 
       <!-- content -->
       <div data-role="content" data-theme="a">
-        <label for="body-type">I am a</label>
-        <select name="body-type" id="body-type">
-          <option value="none" selected disabled hidden>
-            Select an Option
-          </option>
-          <option value="Man">Man</option>
-          <option value="Woman">Woman</option>
-        </select>
-        <br />
-        <label for="workout-type">Workout Type</label>
-        <select name="workout-type" id="workout-type">
-          <option value="none" selected disabled hidden>
-            Select an Option
-          </option>
-          <option value="Walking">Walking</option>
-          <option value="Joggging">Joggging</option>
-          <option value="Sprints">Sprints</option>
-          <option value="Strength_Training">Strength Training</option>
-          <option value="Yoga">Yoga</option>
-          <option value="Dance">Dance</option>
-          <option value="Cycling">Cycling</option>
-          <option value="Treadmill">Treadmill</option>
-          <option value="Elliptical">Elliptical</option>
-          <option value="CrossFit">CrossFit</option>
-          <option value="Jump_Rope">Jump Rope</option>
-          <option value="Basketball">Basketball</option>
-          <option value="Soccer">Soccer</option>
-        </select>
-        <br />
-        <label for="intensity">Intensity</label>
-        <select name="intensity" id="intensity">
-          <option value="none" selected disabled hidden>
-            Select an Option
-          </option>
-          <option value="1">Light (Able to hold a conversation)</option>
-          <option value="2">Moderate (Body warmth, light sweating)</option>
-          <option value="3">
-            Difficult (Moderate sweating, heavy breathing)
-          </option>
-          <option value="4">Intense (Very heavy sweating, can't talk)</option>
-        </select>
-        <br />
-        <label for="workout-duration">Workout Duration (In minutes) :</label>
-        <input name="workout-duration" id="workout-duration-input" />
+        <div class="add-section-container">
+          <label for="body-type">I am a</label>
+          <select name="body-type" id="body-type">
+            <option value="none" selected disabled hidden>
+              Select an Option
+            </option>
+            <option value="Man">Man</option>
+            <option value="Woman">Woman</option>
+          </select>
+          <br />
+          <label for="workout-type">Workout Type</label>
+          <select name="workout-type" id="workout-type">
+            <option value="none" selected disabled hidden>
+              Select an Option
+            </option>
+            <option value="Walking">Walking</option>
+            <option value="Joggging">Joggging</option>
+            <option value="Sprints">Sprints</option>
+            <option value="Strength_Training">Strength Training</option>
+            <option value="Yoga">Yoga</option>
+            <option value="Dance">Dance</option>
+            <option value="Cycling">Cycling</option>
+            <option value="Treadmill">Treadmill</option>
+            <option value="Elliptical">Elliptical</option>
+            <option value="CrossFit">CrossFit</option>
+            <option value="Jump_Rope">Jump Rope</option>
+            <option value="Basketball">Basketball</option>
+            <option value="Soccer">Soccer</option>
+          </select>
+          <br />
+          <label for="intensity">Intensity</label>
+          <select name="intensity" id="intensity">
+            <option value="none" selected disabled hidden>
+              Select an Option
+            </option>
+            <option value="1">Light (Able to hold a conversation)</option>
+            <option value="2">Moderate (Body warmth, light sweating)</option>
+            <option value="3">
+              Difficult (Moderate sweating, heavy breathing)
+            </option>
+            <option value="4">Intense (Very heavy sweating, can't talk)</option>
+          </select>
+          <br />
+          <label for="workout-duration">Workout Duration (In minutes) :</label>
+          <input
+            autocomplete="off"
+            name="workout-duration"
+            id="workout-duration-input"
+          />
 
-        <button id="addBtn">Add Workout</button>
-        <div data-role="popup" id="popupMenu" data-theme="b">
-          <ul data-role="listview" data-inset="true" style="min-width: 210px">
-            <li data-role="list-divider">Choose an action</li>
-            <li><a href="#home" data-transition="flow">Back to Home</a></li>
-            <li><a href="#show" data-transition="fade">Show Workout</a></li>
-          </ul>
+          <button id="addBtn">Add Workout</button>
         </div>
       </div>
 
       <!-- notes footer -->
-      <div data-role="footer" data-theme="a">
+      <div data-role="footer" data-theme="b">
         <h3>Copyright 2022 by Gabriel Blake</h3>
       </div>
     </div>
@@ -183,24 +180,15 @@
 
       <!-- content -->
       <div data-role="content" data-theme="a">
-        <h3>Workout Details</h3>
-        <h4>You clicked the workout with an id of</h4>
-        <div id="workout-id"></div>
-        <div id="workout-title"></div>
-        <div id="workout-intensity"></div>
-        <div id="workout-duration"></div>
-        <h4 id="calories"></h4>
-        <br />
-      </div>
-
-      <!-- <div data-role="popup" id="popupMenu" data-theme="b">
-          <ul data-role="listview" data-inset="true" style="min-width: 210px">
-            <li data-role="list-divider">Choose an action</li>
-            <li><a href="#home" data-transition="flow">Back to Home</a></li>
-            <li><a href="#show" data-transition="fade">Show Workout</a></li>
-          </ul>
+        <div class="workout-details-section-container">
+          <h3>Workout Details</h3>
+          <div id="workout-id"></div>
+          <div id="workout-title"></div>
+          <div id="workout-intensity"></div>
+          <div id="workout-duration"></div>
+          <h4 id="calories"></h4>
         </div>
-      </div> -->
+      </div>
 
       <!-- footer -->
       <div data-role="footer" data-theme="b">

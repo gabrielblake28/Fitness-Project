@@ -3,36 +3,6 @@ var router = express.Router();
 
 let serverArray = [];
 
-// const mensCaloriesPerWorkout = {
-//   Walking: 10,
-//   Jogging: 12,
-//   Sprints: 15,
-//   Strength_Training: 4,
-//   Yoga: 6,
-//   Dance: 10,
-//   Cycling: 13,
-//   Elliptical: 7,
-//   Crossfit: 16,
-//   Jump_Rope: 17,
-//   Basketball: 10,
-//   Soccer: 8,
-// };
-
-// const womensCaloriesPerWorkout = {
-//   Walking: 8,
-//   Jogging: 10,
-//   Sprints: 13,
-//   Strength_Training: 4,
-//   Yoga: 6,
-//   Dance: 10,
-//   Cycling: 11,
-//   Elliptical: 7,
-//   Crossfit: 14,
-//   Jump_Rope: 17,
-//   Basketball: 8,
-//   Soccer: 7,
-// };
-
 let WorkoutObject = function (
   bodyType,
   workoutType,
@@ -65,7 +35,7 @@ let WorkoutObject = function (
 
 serverArray.push(new WorkoutObject("Man", "Sprints", 3, 45));
 serverArray.push(new WorkoutObject("Woman", "Yoga", 3, 60));
-serverArray.push(new WorkoutObject("Man", "Strength_Training", 3, 75));
+serverArray.push(new WorkoutObject("Man", "CrossFit", 3, 75));
 
 /* GET home page. */
 router.get("/", function (req, res, next) {

@@ -60,10 +60,6 @@ let WorkoutObject = function (
   return this;
 };
 
-// workoutArray.push(new WorkoutObject("Man", "Sprints", 3, 45));
-// workoutArray.push(new WorkoutObject("Woman", "Yoga", 3, 60));
-// workoutArray.push(new WorkoutObject("Man", "Strength_Training", 3, 75));
-
 document.addEventListener("DOMContentLoaded", function () {
   // createList();
 
@@ -103,20 +99,20 @@ document.addEventListener("DOMContentLoaded", function () {
     let workoutTitle = localStorage.getItem("title");
     let workoutIntensity = localStorage.getItem("intensity");
     let workoutDuration = localStorage.getItem("duration");
-    // let calories = localStorage.getItem("calories");
-    document.getElementById("workout-id").innerHTML = workoutID;
-    document.getElementById(
-      "workout-title"
-    ).innerHTML = `Workout Type: ${workoutTitle}`;
+    let calories = localStorage.getItem("calories");
+    // document.getElementById("workout-id").innerHTML = workoutID;
+    document.getElementById("workout-title").innerHTML = `Workout Type: ${
+      workoutTitle == "Strength_Training" ? "Strength Training" : workoutTitle
+    }`;
     document.getElementById(
       "workout-intensity"
     ).innerHTML = `Workout Intensity (1-5): ${workoutIntensity}`;
     document.getElementById(
       "workout-duration"
     ).innerHTML = `Workout Duration(in minutes): ${workoutDuration}`;
-    // document.getElementById(
-    //   "calories"
-    // ).innerHTML = `Total Calories Burned: ${calories}`;
+    document.getElementById(
+      "calories"
+    ).innerHTML = `Calories Burned: ${calories}`;
   });
 
   // end of page before show code *************************************************************************
@@ -132,52 +128,49 @@ function createList() {
   $.get("/getAllWorkouts", function (data, status) {
     console.log(status);
     workoutArray = data;
-  
 
-  workoutArray.forEach(function (element, i) {
-    // use handy array forEach method
-    var ul = document.createElement("ul");
+    workoutArray.forEach(function (element, i) {
+      // use handy array forEach method
+      var ul = document.createElement("ul");
 
-    var myLi = document.createElement("li");
-    myLi.classList.add("workout-link");
-    myLi.innerHTML =
-      element.workoutType + ":  " + element.workoutDuration + " mins";
-    
+      var myLi = document.createElement("li");
+      myLi.classList.add("workout-link");
+      myLi.innerHTML =
+        element.workoutType + ":  " + element.workoutDuration + " mins";
 
-    // use the html5 "data-parm" to store the ID of this particular workout object
-    // that we are currently building an li for so that I can later know which workout this li came from
-    myLi.setAttribute("data-parm", element.ID);
-    myLi.setAttribute("workout-title", element.workoutType);
-    myLi.setAttribute("workout-intensity", element.workoutIntensity);
-    myLi.setAttribute("workout-duration", element.workoutDuration);
+      // use the html5 "data-parm" to store the ID of this particular workout object
+      // that we are currently building an li for so that I can later know which workout this li came from
+      myLi.setAttribute("data-parm", element.ID);
+      myLi.setAttribute("workout-title", element.workoutType);
+      myLi.setAttribute("workout-intensity", element.workoutIntensity);
+      myLi.setAttribute("workout-duration", element.workoutDuration);
 
+      ul.appendChild(myLi);
+      // myLi.setAttribute("calories", element.CalculateCalories());
 
-    ul.appendChild(myLi);
-    // myLi.setAttribute("calories", element.CalculateCalories());
+      theList.appendChild(myLi);
 
-    theList.appendChild(myLi);
+      var liList = document.getElementsByClassName("workout-link");
 
-    var liList = document.getElementsByClassName("workout-link");
+      let newWorkoutArray = Array.from(liList);
 
-    let newWorkoutArray = Array.from(liList);
+      newWorkoutArray.forEach(function (element, i) {
+        element.addEventListener("click", function () {
+          var parm = this.getAttribute("data-parm");
+          let title = this.getAttribute("workout-title");
+          console.log(title);
+          var intensity = this.getAttribute("workout-intensity");
+          var duration = this.getAttribute("workout-duration");
+          // let calories = this.getAttribute("calories");
 
-    newWorkoutArray.forEach(function (element, i) {
-      element.addEventListener("click", function () {
-        var parm = this.getAttribute("data-parm");
-        let title = this.getAttribute("workout-title");
-        // var duration = this.getAttribute("workout-duration");
-        var intensity = this.getAttribute("workout-intensity");
-        var duration = this.getAttribute("workout-duration");
-        // let calories = this.getAttribute("calories");
-
-        localStorage.setItem("title", title);
-        localStorage.setItem("parm", parm);
-        localStorage.setItem("intensity", intensity);
-        localStorage.setItem("duration", duration);
-        // localStorage.setItem("calories", calories);
-        document.location.href = "index.html#details";
+          localStorage.setItem("title", title);
+          localStorage.setItem("parm", parm);
+          localStorage.setItem("intensity", intensity);
+          localStorage.setItem("duration", duration);
+          // localStorage.setItem("calories", calories);
+          document.location.href = "index.html#details";
+        });
       });
     });
   });
-});
 }
