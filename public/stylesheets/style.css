@@ -36,5 +36,11 @@
 }
 
 .workout-details-section-container {
+  width: 300px;
   height: calc(100vh - 177px);
+}
+
+.delete-button {
+  margin-top: 100px;
+  width: 300px;
 }

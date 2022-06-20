@@ -5,10 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./stylesheets/style.css" />
-    <!-- <link
-      rel="stylesheet"
-      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
-    /> -->
 
     <link rel="stylesheet" href="stylesheets/themes/my-custom-theme.css" />
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
@@ -19,13 +15,8 @@
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-    <!-- <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
-
     <script src="/javascripts/index.js"></script>
     <title>Fitness Tracker</title>
-
-    <!-- This project will keep track of user input workouts and calculate relevant details based on the type of workout -->
   </head>
   <body>
     <div data-role="page" id="home">
@@ -198,6 +189,9 @@
           <div id="workout-intensity"></div>
           <div id="workout-duration"></div>
           <h4 id="calories"></h4>
+          <div class="delete-button">
+            <button onclick="deleteWorkout()">Delete</button>
+          </div>
         </div>
       </div>
 

@@ -120,6 +120,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // function getCalories() {}
 
+function deleteWorkout() {
+  $.ajax({
+    type: "DELETE",
+    url: "/deleteWorkout",
+    data: { id: localStorage.getItem("parm") },
+    success: function (result) {
+      console.log(result.data);
+      document.location.href = "index.html#show";
+    },
+  });
+  // document.location.href = "index.html#show";
+}
+
 function createList() {
   // clear prior data
   let theList = document.getElementById("myul");

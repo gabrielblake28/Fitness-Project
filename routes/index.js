@@ -53,6 +53,11 @@ router.post("/AddWorkout", function (req, res) {
   res.status(200).json(newWorkout);
 });
 
+router.delete("/deleteWorkout", function (req, res) {
+  serverArray = serverArray.filter((data) => data.ID !== req.body.id);
+  res.status(200).send("deleted array");
+});
+
 // router.delete("/DeleteWorkout", function () {});
 
 module.exports = router;
