@@ -4,7 +4,7 @@ const mensCaloriesPerWorkout = {
   Walking: 10,
   Jogging: 12,
   Sprints: 15,
-  Strength_Training: 4,
+  ["Strength Training"]: 7,
   Yoga: 6,
   Dance: 10,
   Cycling: 13,
@@ -18,8 +18,8 @@ const mensCaloriesPerWorkout = {
 const womensCaloriesPerWorkout = {
   Walking: 8,
   Jogging: 10,
-  Sprints: 13,
-  Strength_Training: 4,
+  Sprints: 14,
+  ["Strength Training"]: 6,
   Yoga: 6,
   Dance: 10,
   Cycling: 11,
@@ -36,33 +36,41 @@ let WorkoutObject = function (
   workoutIntensity,
   workoutDuration
 ) {
-  let self = this;
   this.bodyType = bodyType;
   this.workoutType = workoutType;
   this.workoutIntensity = workoutIntensity;
   this.workoutDuration = workoutDuration;
   this.ID = Math.random().toString(16).slice(5);
+  this.calories = CalculateCalories(
+    bodyType,
+    workoutType,
+    workoutIntensity,
+    workoutDuration
+  );
 
-  this.MAX_OUTPUT = 5;
-  this.CaloriesPerMinute = () => {
-    return this.bodyType === "Man"
-      ? mensCaloriesPerWorkout[this.workoutType]
-      : womensCaloriesPerWorkout[this.workoutType];
-  };
-  this.CalculateCalories = () => {
-    return Math.round(
-      self.CaloriesPerMinute() *
-        (self.workoutIntensity / self.MAX_OUTPUT) *
-        self.workoutDuration
-    );
-  };
+  function CalculateCalories(
+    bodyType,
+    workoutType,
+    workoutIntensity,
+    workoutDuration
+  ) {
+    return bodyType == "Man"
+      ? Math.round(
+          mensCaloriesPerWorkout[workoutType] *
+            (workoutIntensity / 5) *
+            workoutDuration
+        )
+      : Math.round(
+          womensCaloriesPerWorkout[workoutType] *
+            (workoutIntensity / 5) *
+            workoutDuration
+        );
+  }
 
   return this;
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  // createList();
-
   // add button events ************************************************************************
 
   document.getElementById("addBtn").addEventListener("click", function () {
@@ -100,10 +108,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let workoutIntensity = localStorage.getItem("intensity");
     let workoutDuration = localStorage.getItem("duration");
     let calories = localStorage.getItem("calories");
-    // document.getElementById("workout-id").innerHTML = workoutID;
-    document.getElementById("workout-title").innerHTML = `Workout Type: ${
-      workoutTitle == "Strength_Training" ? "Strength Training" : workoutTitle
-    }`;
+    document.getElementById(
+      "workout-title"
+    ).innerHTML = `Workout Type: ${workoutTitle}`;
     document.getElementById(
       "workout-intensity"
     ).innerHTML = `Workout Intensity (1-5): ${workoutIntensity}`;
@@ -118,19 +125,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // end of page before show code *************************************************************************
 });
 
-// function getCalories() {}
-
 function deleteWorkout() {
   $.ajax({
     type: "DELETE",
     url: "/deleteWorkout",
     data: { id: localStorage.getItem("parm") },
-    success: function (result) {
-      console.log(result.data);
+    success: function () {
       document.location.href = "index.html#show";
     },
   });
-  // document.location.href = "index.html#show";
 }
 
 function createList() {
@@ -140,10 +143,10 @@ function createList() {
 
   $.get("/getAllWorkouts", function (data, status) {
     console.log(status);
+    totalCalories = 0;
     workoutArray = data;
 
     workoutArray.forEach(function (element, i) {
-      // use handy array forEach method
       var ul = document.createElement("ul");
 
       var myLi = document.createElement("li");
@@ -157,9 +160,13 @@ function createList() {
       myLi.setAttribute("workout-title", element.workoutType);
       myLi.setAttribute("workout-intensity", element.workoutIntensity);
       myLi.setAttribute("workout-duration", element.workoutDuration);
-
+      myLi.setAttribute("calories", element.calories);
       ul.appendChild(myLi);
-      // myLi.setAttribute("calories", element.CalculateCalories());
+      totalCalories += element.calories;
+      document.getElementsByClassName(
+        "total-calories"
+      )[0].innerHTML = `Total Calories Burned: ${totalCalories}`;
+      //calories
 
       theList.appendChild(myLi);
 
@@ -174,13 +181,13 @@ function createList() {
           console.log(title);
           var intensity = this.getAttribute("workout-intensity");
           var duration = this.getAttribute("workout-duration");
-          // let calories = this.getAttribute("calories");
+          let calories = this.getAttribute("calories");
 
           localStorage.setItem("title", title);
           localStorage.setItem("parm", parm);
           localStorage.setItem("intensity", intensity);
           localStorage.setItem("duration", duration);
-          // localStorage.setItem("calories", calories);
+          localStorage.setItem("calories", calories);
           document.location.href = "index.html#details";
         });
       });
