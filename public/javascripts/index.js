@@ -10,7 +10,7 @@ const mensCaloriesPerWorkout = {
   Cycling: 13,
   Elliptical: 7,
   Crossfit: 16,
-  Jump_Rope: 17,
+  ["Jump Rope"]: 17,
   Basketball: 10,
   Soccer: 8,
 };
@@ -25,7 +25,7 @@ const womensCaloriesPerWorkout = {
   Cycling: 11,
   Elliptical: 7,
   Crossfit: 14,
-  Jump_Rope: 17,
+  ["Jump Rope"]: 17,
   Basketball: 8,
   Soccer: 7,
 };
@@ -34,7 +34,8 @@ let WorkoutObject = function (
   bodyType,
   workoutType,
   workoutIntensity,
-  workoutDuration
+  workoutDuration,
+  date
 ) {
   this.bodyType = bodyType;
   this.workoutType = workoutType;
@@ -47,6 +48,7 @@ let WorkoutObject = function (
     workoutIntensity,
     workoutDuration
   );
+  this.date = new Date().toLocaleDateString("en-US");
 
   function CalculateCalories(
     bodyType,
@@ -102,21 +104,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // need one for our details page to fill in the info based on the passed in ID
   $(document).on("pagebeforeshow", "#details", function (event) {
+    let now = new Date();
     console.log(localStorage);
+    let workoutDate = localStorage.getItem("date");
     let workoutID = localStorage.getItem("parm"); // get the unique key back from the storage dictionairy
     let workoutTitle = localStorage.getItem("title");
     let workoutIntensity = localStorage.getItem("intensity");
     let workoutDuration = localStorage.getItem("duration");
     let calories = localStorage.getItem("calories");
     document.getElementById(
+      "workout-id"
+    ).innerHTML = `Date: ${now.toLocaleDateString("en-US")}`;
+    document.getElementById(
       "workout-title"
-    ).innerHTML = `Workout Type: ${workoutTitle}`;
+    ).innerHTML = `Exercise: ${workoutTitle}`;
     document.getElementById(
       "workout-intensity"
-    ).innerHTML = `Workout Intensity (1-5): ${workoutIntensity}`;
+    ).innerHTML = `Intensity (1-5): ${workoutIntensity}`;
     document.getElementById(
       "workout-duration"
-    ).innerHTML = `Workout Duration(in minutes): ${workoutDuration}`;
+    ).innerHTML = `Duration (minutes): ${workoutDuration}`;
     document.getElementById(
       "calories"
     ).innerHTML = `Calories Burned: ${calories}`;
@@ -157,6 +164,7 @@ function createList() {
       // use the html5 "data-parm" to store the ID of this particular workout object
       // that we are currently building an li for so that I can later know which workout this li came from
       myLi.setAttribute("data-parm", element.ID);
+      myLi.setAttribute("date", element.date);
       myLi.setAttribute("workout-title", element.workoutType);
       myLi.setAttribute("workout-intensity", element.workoutIntensity);
       myLi.setAttribute("workout-duration", element.workoutDuration);
@@ -177,13 +185,14 @@ function createList() {
       newWorkoutArray.forEach(function (element, i) {
         element.addEventListener("click", function () {
           var parm = this.getAttribute("data-parm");
+          let date = this.getAttribute("date");
           let title = this.getAttribute("workout-title");
-          console.log(title);
           var intensity = this.getAttribute("workout-intensity");
           var duration = this.getAttribute("workout-duration");
           let calories = this.getAttribute("calories");
 
           localStorage.setItem("title", title);
+          localStorage.setItem("date", date);
           localStorage.setItem("parm", parm);
           localStorage.setItem("intensity", intensity);
           localStorage.setItem("duration", duration);

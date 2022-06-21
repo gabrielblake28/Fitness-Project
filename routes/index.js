@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 let serverArray = [];
+
 const mensCaloriesPerWorkout = {
   Walking: 10,
   Jogging: 12,
@@ -12,7 +13,7 @@ const mensCaloriesPerWorkout = {
   Cycling: 13,
   Elliptical: 7,
   Crossfit: 16,
-  Jump_Rope: 17,
+  ["Jump Rope"]: 17,
   Basketball: 10,
   Soccer: 8,
 };
@@ -27,7 +28,7 @@ const womensCaloriesPerWorkout = {
   Cycling: 11,
   Elliptical: 7,
   Crossfit: 14,
-  Jump_Rope: 17,
+  ["Jump Rope"]: 17,
   Basketball: 8,
   Soccer: 7,
 };
@@ -35,7 +36,8 @@ let WorkoutObject = function (
   bodyType,
   workoutType,
   workoutIntensity,
-  workoutDuration
+  workoutDuration,
+  date
 ) {
   this.bodyType = bodyType;
   this.workoutType = workoutType;
@@ -48,6 +50,7 @@ let WorkoutObject = function (
     workoutIntensity,
     workoutDuration
   );
+  this.date = new Date().toLocaleDateString("en-US");
 
   function CalculateCalories(
     bodyType,
