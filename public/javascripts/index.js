@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let workoutDuration = localStorage.getItem("duration");
     let calories = localStorage.getItem("calories");
     document.getElementById(
-      "workout-id"
+      "workout-date"
     ).innerHTML = `Date: ${now.toLocaleDateString("en-US")}`;
     document.getElementById(
       "workout-title"
