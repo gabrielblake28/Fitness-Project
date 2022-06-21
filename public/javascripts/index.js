@@ -34,8 +34,7 @@ let WorkoutObject = function (
   bodyType,
   workoutType,
   workoutIntensity,
-  workoutDuration,
-  date
+  workoutDuration
 ) {
   this.bodyType = bodyType;
   this.workoutType = workoutType;

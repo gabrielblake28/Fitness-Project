@@ -1,7 +1,29 @@
 var express = require("express");
 var router = express.Router();
+var fs = require("fs");
 
 let serverArray = [];
+
+let fileManager = {
+  read: function () {
+    var rawdata = fs.readFileSync("objectdata.json");
+    let goodData = JSON.parse(rawdata);
+    serverArray = goodData;
+  },
+  write: function () {
+    let data = JSON.stringify(serverArray);
+    fs.writeFileSync("objectdata.json", data);
+  },
+  validData: function () {
+    var rawdata = fs.readFileSync("objectdata.json");
+    console.log(rawdata.length);
+    if (rawdata.length < 1) {
+      return false;
+    } else {
+      return true;
+    }
+  },
+};
 
 const mensCaloriesPerWorkout = {
   Walking: 10,
@@ -36,8 +58,7 @@ let WorkoutObject = function (
   bodyType,
   workoutType,
   workoutIntensity,
-  workoutDuration,
-  date
+  workoutDuration
 ) {
   this.bodyType = bodyType;
   this.workoutType = workoutType;
@@ -74,9 +95,18 @@ let WorkoutObject = function (
   return this;
 };
 
-serverArray.push(new WorkoutObject("Man", "Sprints", 3, 45));
-serverArray.push(new WorkoutObject("Woman", "Yoga", 3, 60));
-serverArray.push(new WorkoutObject("Man", "Crossfit", 3, 75));
+if (!fileManager.validData()) {
+  serverArray.push(new WorkoutObject("Man", "Sprints", 3, 45));
+  serverArray.push(new WorkoutObject("Woman", "Yoga", 3, 60));
+  serverArray.push(new WorkoutObject("Man", "Crossfit", 3, 75));
+  fileManager.write();
+} else {
+  fileManager.read();
+}
+
+// serverArray.push(new WorkoutObject("Man", "Sprints", 3, 45));
+// serverArray.push(new WorkoutObject("Woman", "Yoga", 3, 60));
+// serverArray.push(new WorkoutObject("Man", "Crossfit", 3, 75));
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -84,17 +114,20 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/getAllWorkouts", function (req, res) {
+  fileManager.read();
   res.status(200).json(serverArray);
 });
 
 router.post("/AddWorkout", function (req, res) {
   const newWorkout = req.body;
   serverArray.push(newWorkout);
+  fileManager.write();
   res.status(200).json(newWorkout);
 });
 
 router.delete("/deleteWorkout", function (req, res) {
   serverArray = serverArray.filter((data) => data.ID !== req.body.id);
+  fileManager.write();
   res.status(200).send("deleted array");
 });
 
